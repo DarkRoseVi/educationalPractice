@@ -1,0 +1,24 @@
+﻿<Window x:Class="Practice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practice"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+  
+        <Rectangle Grid.Row="0" Fill="#FFCDFDFF"></Rectangle>
+        <Image Source="C:\Users\232001\source\repos\Practice\Practice\Resurses\logo.png" HorizontalAlignment="Left"></Image>
+        <Button x:Name="BackBtn" Style="{StaticResource MyButton }" Content="Назад" Margin="70 0 100 0" Click="BackBtn_Click" ></Button>
+        <Button x:Name="ExitBtn"  Style="{StaticResource MyButton}"  Content="Выход" Margin="10" Click="ExitBtn_Click"></Button>
+        <TextBlock  Style="{StaticResource MyTitle}" x:Name="MyTitle"> Начало </TextBlock>
+        <Rectangle Grid.Row="2" Fill="#FFCDFDFF"></Rectangle>
+        <Frame x:Name="MyFarame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
+    </Grid>
+</Window>

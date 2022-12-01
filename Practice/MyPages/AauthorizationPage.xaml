@@ -1,0 +1,25 @@
+﻿<Page x:Class="Practice.MyPages.AauthorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practice.MyPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AauthorizationPage">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock> Логин</TextBlock>
+            <TextBox x:Name="LoginTb"></TextBox>
+            <TextBlock> Пароль</TextBlock>
+            <TextBox x:Name="PasswordTb" Height="20"></TextBox>
+            <CheckBox x:Name="RememberCh" Content="Запомнить меня"></CheckBox>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="EntranceBtn" Content="Вход" Style="{StaticResource MyButton}" Margin="5" Click="EntranceBtn_Click"></Button>
+                <Button x:Name="RegisterBtn" Content="Зарегистрироваться" Style="{StaticResource MyButton}" Margin="5" Width="130" Click="RegisterBtn_Click" ></Button>
+            </StackPanel>
+        
+        </StackPanel>
+    </Grid>
+</Page>

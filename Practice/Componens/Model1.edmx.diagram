@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82c7607bfb2d443c898fc4dcadce549e" Name="Diagram1">
+        <EntityTypeShape EntityType="ProductViModel.Country" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.CountryProduct" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Gender" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Order" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Product" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.ProductOrder" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.ProductShipment" Width="1.5" PointX="10.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Provider" Width="1.5" PointX="5.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Roly" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Shipment" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.Stage" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.UnitMeasurement" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductViModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ProductViModel.FK_CountryProduct_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_CountryProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Order_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Order_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_ProductOrder_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Product_UnitMeasurement" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_ProductOrder_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_ProductShipment_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_ProductShipment_Shipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Shipment_Provider1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductViModel.FK_Client_Roly" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
