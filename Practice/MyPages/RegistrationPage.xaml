@@ -9,6 +9,20 @@
       Title="RegistrationPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>Login</TextBlock>
+            <TextBox x:Name="LoginTb" Width="100"></TextBox>
+            <TextBlock>Password</TextBlock>
+            <PasswordBox x:Name="PasswordTb" Width="100"></PasswordBox>
+            <TextBlock>Password2</TextBlock>
+            <PasswordBox x:Name="Password2Tb" Width="100"></PasswordBox>
+            <TextBlock>Last Name</TextBlock>
+            <TextBox x:Name="LastNameTb" Width="100"></TextBox>
+            <TextBlock>First Name</TextBlock>
+            <TextBox x:Name="FirstNameTb" Width="100"></TextBox>
+            <TextBlock>Patronymic</TextBlock>
+            <TextBox x:Name="PatronymicTb" Width="100"></TextBox>
+            <Button x:Name="RegBt" Content="Зарегистрироваться" Margin="5" Click="RegBt_Click"></Button>
+        </StackPanel>
     </Grid>
 </Page>

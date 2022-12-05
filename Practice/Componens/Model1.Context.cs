@@ -37,6 +37,7 @@ namespace Practice.Componens
         public virtual DbSet<Shipment> Shipment { get; set; }
         public virtual DbSet<Stage> Stage { get; set; }
         public virtual DbSet<UnitMeasurement> UnitMeasurement { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

@@ -5,10 +5,98 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Practice.MyPages"
       mc:Ignorable="d" 
+      Name="Root"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListproductPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="151*"/>
+            <RowDefinition Height="34*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Margin="5" Width="150">
+                <TextBlock  HorizontalAlignment="Center">Количество запсией</TextBlock>
+                <ComboBox x:Name="QuantityCb" Margin="10">
+                    <ComboBoxItem Tag="1">5</ComboBoxItem>
+                    <ComboBoxItem Tag="2">10</ComboBoxItem>
+                    <ComboBoxItem Tag="3">20</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5" Width="150">
+                <TextBlock  HorizontalAlignment="Center">Сортировка</TextBlock>
+                <ComboBox x:Name="SortCb" Margin="10" SelectionChanged="SortCb_SelectionChanged">
+                    <ComboBoxItem Tag="1">от А до Я</ComboBoxItem>
+                    <ComboBoxItem Tag="2">от Я до А</ComboBoxItem>
+                    <ComboBoxItem Tag="3">все</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5" Width="150">
+                <TextBlock  HorizontalAlignment="Center">Фильтр</TextBlock>
+                <ComboBox x:Name="FiltrCb" Margin="10">
+                    <ComboBoxItem Tag="1">5</ComboBoxItem>
+                    <ComboBoxItem Tag="2">10</ComboBoxItem>
+                    <ComboBoxItem Tag="3">20</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5" >
+                <TextBlock HorizontalAlignment="Center">Поиск</TextBlock>
+                <TextBox x:Name="PoiskTb" Margin="10"  Width="250" TextChanged="PoiskTb_TextChanged"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding ElementName=Root, Path=products}" d:ItemsSource="{d:SampleData ItemCount=5}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="600"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <TextBlock>Картинка</TextBlock>
+                                <Image Source="{Binding Photo}"></Image>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock>Название</TextBlock>
+                                <TextBlock Text="{Binding Name}" Margin="5"></TextBlock>
+                            
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+
+                                <TextBlock>Стоимость</TextBlock>
+                                <TextBlock Text="{Binding Cost}"></TextBlock>
+                                <TextBlock>Описание</TextBlock>
+                                <TextBlock Text="{Binding Description}"></TextBlock>
+                                <TextBlock>Единица измерения</TextBlock>
+                                <TextBlock Text="{Binding UnitMeasurement }"></TextBlock>
+                                <TextBlock>Последняя дата поставки</TextBlock>
+                                <TextBlock Text="{Binding Date }"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <Button Content="Заявка" Style="{StaticResource Butpage}" HorizontalAlignment="Left"></Button>
+                                <Button Content="Редактирование" Style="{StaticResource Butpage}" HorizontalAlignment="Left" Click="Button_Click"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                   
+                </DataTemplate>
+            </ListView.ItemTemplate>
+           
+        </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="&lt;" x:Name="LeftBtn" Margin="10 0" Width="30" Click="LeftBtn_Click"></Button>
+            
+
+            <TextBlock x:Name="FondCount" Margin="5"></TextBlock>
+            <TextBlock x:Name="GeneralCount" Margin="5"></TextBlock>
+            <Button Content="&gt;" x:Name="RightBtn"  Margin="10 0" Width ="30" Click="RightBtn_Click"></Button>
+
+        </StackPanel>
     </Grid>
 </Page>

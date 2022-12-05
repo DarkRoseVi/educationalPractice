@@ -17,20 +17,21 @@
         <EntityTypeShape EntityType="ProductViModel.Shipment" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="ProductViModel.Stage" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ProductViModel.UnitMeasurement" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductViModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="ProductViModel.FK_CountryProduct_Country" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_CountryProduct_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductViModel.FK_Client_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_Order_Stage" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductViModel.FK_Order_User" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductViModel.FK_Order_User1" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_ProductOrder_Order" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_Product_UnitMeasurement" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_ProductOrder_Product" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_ProductShipment_Product" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_ProductShipment_Shipment" ManuallyRouted="false" />
         <AssociationConnector Association="ProductViModel.FK_Shipment_Provider1" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductViModel.FK_Client_Roly" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProductViModel.sysdiagrams" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductViModel.User" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="ProductViModel.FK_Client_Gender" />
+        <AssociationConnector Association="ProductViModel.FK_Order_User" />
+        <AssociationConnector Association="ProductViModel.FK_Order_User1" />
+        <AssociationConnector Association="ProductViModel.FK_Client_Roly" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

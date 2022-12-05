@@ -48,6 +48,7 @@ namespace Practice.MyPages
                 if (Navigation.AutoUser == null)
                 {
                     MessageBox.Show("Такого пользователя нет ");
+                   
                 }
                 else
                 {
@@ -63,9 +64,10 @@ namespace Practice.MyPages
                         Properties.Settings.Default.Password = null;
                         Properties.Settings.Default.Save();
                     }
+                    Navigation.IsUser = true;
+                    Navigation.NextPage(new Nav("Продукты", new ListproductPage()));
                 }
-                Navigation.IsUser = true;
-                     Navigation.NextPage(new Nav("Продукты", new ListproductPage()));
+               
             } 
         }
 
