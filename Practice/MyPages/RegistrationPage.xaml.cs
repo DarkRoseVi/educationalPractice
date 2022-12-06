@@ -43,21 +43,22 @@ namespace Practice.MyPages
             {
                 if (login.Length > 0 && password.Length > 0 && password2.Length > 0)
                 {
-                    BdConect.db.User.Add(new User
-                    {
-                        Login = login,
-                        Password = password,
-                        LastName = lastname,
-                        FirstName = fistname,
-                        Patronymic = patronymic
-                    });
+                   
                     if (BdConect.db.User.Local.Any(x => x.Login == login))
                     {
                         MessageBox.Show("Такой пользователль уже существует ");
                         return;
                     }
                     else
-                    {
+                    { 
+                        BdConect.db.User.Add(new User
+                        {
+                            Login = login,
+                            Password = password,
+                            LastName = lastname,
+                            FirstName = fistname,
+                            Patronymic = patronymic
+                        });
                         //string[] datalogin = LoginTb.Text.Split('@');
                         //if (datalogin.Length == 2)
                         //{

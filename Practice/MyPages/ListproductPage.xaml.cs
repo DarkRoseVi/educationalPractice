@@ -46,44 +46,66 @@ namespace Practice.MyPages
         public void Rechres()
         {
             ObservableCollection<Product> pr = new ObservableCollection<Product>();
-            switch ((SortCb.SelectedItem as ComboBoxItem).Tag)
+            if ((SortCb.SelectedItem as ComboBoxItem).Tag == null)
+            {
+                MessageBox.Show("");
+            }
+            else 
+            {
+                switch ((SortCb.SelectedItem as ComboBoxItem).Tag)
+                {
+                    case "1":
+                        pr = new ObservableCollection<Product>(products.OrderBy(x => x.Name));
+                        break;
+                    case "2":
+                        pr = new ObservableCollection<Product>(products.OrderByDescending(x => x.Name));
+                        break;
+                    case "3":
+                        pr = BdConect.db.Product.Local;
+                        break;
+                    default:
+                        break;
+                }
+            }
+         
+
+            switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
             {
                 case "1":
-                    pr = new ObservableCollection<Product>(products.OrderBy(x=>x.Name));
+                    pr = BdConect.db.Product.Local;
                     break;
                 case "2":
-                    pr = new ObservableCollection<Product>(products.OrderByDescending(x => x.Name));
+                    pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 1));
                     break;
                 case "3":
-                    pr = BdConect.db.Product.Local;
+                    pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 2));
                     break;
                 default:
                     break;
             }
-
-         
-            if (QuantityCb.SelectedIndex>0 && pr.Count>0) 
+            ProductListViu.ItemsSource = pr.ToArray();
+            if (QuantityCb.SelectedIndex > 0 && pr.Count > 0)
             {
                 int selCount = Convert.ToInt32((QuantityCb.SelectedItem as ComboBoxItem).Content);
-                pr = new ObservableCollection<Product>( pr.Skip(selCount* actualPage).Take(selCount));
-                if (pr.Count() == 0) 
+                pr = new ObservableCollection<Product>(pr.Skip(selCount * actualPage).Take(selCount));
+                if (pr.Count() == 0)
                 {
                     actualPage--;
                     Rechres();
                 }
             }
 
-            if (PoiskTb.Text.Length>0)
+            if (PoiskTb.Text.Length > 0)
             {
-                pr=new ObservableCollection<Product>(products.Where(x => x.Name.ToLower().StartsWith(PoiskTb.Text.ToLower())));
+                pr = new ObservableCollection<Product>(products.Where(x => x.Name.ToLower().StartsWith(PoiskTb.Text.ToLower())));
             }
             products = pr;
 
-        }
 
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var Prod = (sender as Button).DataContext as Product;   
+            var Prod = (sender as Button).DataContext as Product;
             Navigation.NextPage(new Nav("Редкатирование", new EditingPage(Prod)));
         }
 
@@ -112,5 +134,11 @@ namespace Practice.MyPages
         {
             Rechres();
         }
+
+        private void FiltrCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Rechres();
+        }
+
     }
 }

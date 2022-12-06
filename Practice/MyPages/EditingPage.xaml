@@ -9,27 +9,36 @@
       Title="EditingPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Height="282" Width="200" >
-          
-            <TextBlock>Name</TextBlock>
-            <TextBox x:Name="NameTb" Text="{Binding Name}"></TextBox>
-            <TextBlock>Cost</TextBlock>
-            <TextBox x:Name="CostTb" Text="{Binding Cost}"></TextBox>
-            <TextBlock>Date</TextBlock>
-            <TextBox x:Name="DateTb" Text="{Binding Date}" ></TextBox>
-            <TextBlock>UnitMeasurement</TextBlock>
-            <TextBox x:Name="CostBt" Text="{Binding UnitMeasurementId}" ></TextBox>
-            <TextBlock>Description</TextBlock>
-            <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding Description}"></TextBox>
-            <Button x:Name="SaveBtn" Content="Схранить изменения" Margin="5" Click="SaveBtn_Click" ></Button>
+        
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Margin="30">
+
+            <StackPanel >
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock>Name</TextBlock>
+                    <TextBox x:Name="NameTb" Text="{Binding Name}" Margin="5" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock>Cost</TextBlock>
+                    <TextBox x:Name="CostTb" Text="{Binding Cost}" Margin="5" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock>Date</TextBlock>
+                    <TextBox x:Name="DateTb" Text="{Binding Date}" Margin="5" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock>UnitMeasurement</TextBlock>
+                    <TextBox x:Name="CostBt" Text="{Binding UnitMeasurementId}" Margin="5" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock>Description</TextBlock>
+                    <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding Description}"></TextBox>
+                </StackPanel>
+                <Button x:Name="SaveBtn" Content="Схранить изменения" Margin="5" Click="SaveBtn_Click" ></Button>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" >
-            <Image Source="{Binding Photo}"  Margin="50 150 50 5 " Width="150" Height="150"></Image>
-            <Button Content="Добавить" Margin="5 25" Style="{StaticResource Butpage}"></Button>
+        <StackPanel  HorizontalAlignment="Center" Orientation="Vertical"  VerticalAlignment="Top" Margin="70">
+            <Image x:Name="ProductPhoto" Source="{Binding Photo}"  Width="150" Height="150"></Image>
+            <Button x:Name="AddBt" Content="Добавить"  Style="{StaticResource Butpage}" Click="AddBt_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>

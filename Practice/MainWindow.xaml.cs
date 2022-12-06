@@ -32,6 +32,8 @@ namespace Practice
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
+            Navigation.IsUser = false;
+            Navigation.navs.Clear();
             Navigation.NextPage(new Nav("Авторизация", new AauthorizationPage()));
         }
 

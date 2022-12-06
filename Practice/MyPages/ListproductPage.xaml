@@ -34,10 +34,10 @@
             </StackPanel>
             <StackPanel Margin="5" Width="150">
                 <TextBlock  HorizontalAlignment="Center">Фильтр</TextBlock>
-                <ComboBox x:Name="FiltrCb" Margin="10">
-                    <ComboBoxItem Tag="1">5</ComboBoxItem>
-                    <ComboBoxItem Tag="2">10</ComboBoxItem>
-                    <ComboBoxItem Tag="3">20</ComboBoxItem>
+                <ComboBox x:Name="FiltrCb" Margin="10" SelectionChanged="FiltrCb_SelectionChanged">
+                    <ComboBoxItem Tag="1">Все</ComboBoxItem>
+                    <ComboBoxItem Tag="2">кг</ComboBoxItem>
+                    <ComboBoxItem Tag="3">шт</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Margin="5" >
@@ -45,7 +45,7 @@
                 <TextBox x:Name="PoiskTb" Margin="10"  Width="250" TextChanged="PoiskTb_TextChanged"></TextBox>
             </StackPanel>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding ElementName=Root, Path=products}" d:ItemsSource="{d:SampleData ItemCount=5}" >
+        <ListView Grid.Row="1" ItemsSource="{Binding ElementName=Root, Path=products}" d:ItemsSource="{d:SampleData ItemCount=5}"  x:Name="ProductListViu">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border>
