@@ -26,7 +26,6 @@ namespace Practice.Componens
         }
     
         public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<CountryProduct> CountryProduct { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Product> Product { get; set; }
@@ -36,8 +35,8 @@ namespace Practice.Componens
         public virtual DbSet<Roly> Roly { get; set; }
         public virtual DbSet<Shipment> Shipment { get; set; }
         public virtual DbSet<Stage> Stage { get; set; }
-        public virtual DbSet<UnitMeasurement> UnitMeasurement { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<UnitMeasurement> UnitMeasurement { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

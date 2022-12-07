@@ -2,19 +2,12 @@
 using Practice.Componens;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 namespace Practice.MyPages
@@ -24,41 +17,52 @@ namespace Practice.MyPages
     /// </summary>
     public partial class EditingPage : Page
     {
-        Componens.Product product; 
-        public EditingPage(Componens.Product _product)
+        public Product product { get; set; }
+        public List<UnitMeasurement> MesreUnits { get; set; }
+        public EditingPage(Product _product)
         {
-            InitializeComponent();
+            BdConect.db.UnitMeasurement.Load();
+            MesreUnits = BdConect.db.UnitMeasurement.Local.ToList();
             product = _product;
-            DataContext = product;
+
+            InitializeComponent();
 
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             var ProdId = BdConect.db.Product.Where(x => x.Name == NameTb.Text.Trim()).FirstOrDefault();
-            if (ProdId == null) 
-            { 
+            if (ProdId == null)
+            {
                 BdConect.db.Product.Add(product);
                 MessageBox.Show("yes");
             }
             BdConect.db.SaveChanges();
             Navigation.NextPage(new Nav("Продукты", new ListproductPage()));
         }
-        public void Update() 
+        public void Update()
         {
         }
 
         private void AddBt_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFil = new OpenFileDialog() 
+            OpenFileDialog openFil = new OpenFileDialog()
             {
-            Filter = "**.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg",
+                Filter = "**.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg",
             };
             if (openFil.ShowDialog().GetValueOrDefault())
             {
                 product.Photo = File.ReadAllBytes(openFil.FileName);
                 ProductPhoto.Source = new BitmapImage(new Uri(openFil.FileName));
             }
+        }
+
+        private void UnitMeasurementCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (UnitMeasurementCb.SelectedItem == null)
+                return;
+            product.UnitMeasurement = UnitMeasurementCb.SelectedItem as UnitMeasurement;
         }
     }
 }

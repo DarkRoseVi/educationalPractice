@@ -45,12 +45,8 @@ namespace Practice.MyPages
         }
         public void Rechres()
         {
-            ObservableCollection<Product> pr = new ObservableCollection<Product>();
-            if ((SortCb.SelectedItem as ComboBoxItem).Tag == null)
-            {
-                MessageBox.Show("");
-            }
-            else 
+            ObservableCollection<Product> pr = products;
+            if (SortCb.SelectedItem !=null)
             {
                 switch ((SortCb.SelectedItem as ComboBoxItem).Tag)
                 {
@@ -67,22 +63,28 @@ namespace Practice.MyPages
                         break;
                 }
             }
-         
 
-            switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
+            products = pr;
+            if (FiltrCb.SelectedItem != null)
             {
-                case "1":
-                    pr = BdConect.db.Product.Local;
-                    break;
-                case "2":
-                    pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 1));
-                    break;
-                case "3":
-                    pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 2));
-                    break;
-                default:
-                    break;
+                switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
+                {
+                    case "1":
+                        pr = BdConect.db.Product.Local;
+                        break;
+                    case "2":
+                        pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 1));
+                        break;
+                    case "3":
+                        pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 2));
+                        break;
+                    default:
+                        break;
+                }
             }
+            products = pr;
+
+
             ProductListViu.ItemsSource = pr.ToArray();
             if (QuantityCb.SelectedIndex > 0 && pr.Count > 0)
             {
@@ -95,9 +97,15 @@ namespace Practice.MyPages
                 }
             }
 
+            //filterSevice = filterSevice.Where(x => x.Title.StartsWith(NameDisSearch.Text) || x.Description.StartsWith(NameDisSearch.Text));
+
             if (PoiskTb.Text.Length > 0)
             {
-                pr = new ObservableCollection<Product>(products.Where(x => x.Name.ToLower().StartsWith(PoiskTb.Text.ToLower())));
+                pr = new ObservableCollection<Product>(products.Where(x => x.Name.StartsWith(PoiskTb.Text)));
+            }
+            else 
+            {
+                pr = BdConect.db.Product.Local;
             }
             products = pr;
 
@@ -140,5 +148,11 @@ namespace Practice.MyPages
             Rechres();
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           // Navigation.NextPage(new Nav("Создание заказа", new OrderSavepage()));
+        }
+
+        
     }
 }

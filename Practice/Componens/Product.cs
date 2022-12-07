@@ -17,9 +17,9 @@ namespace Practice.Componens
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.CountryProduct = new HashSet<CountryProduct>();
             this.ProductOrder = new HashSet<ProductOrder>();
             this.ProductShipment = new HashSet<ProductShipment>();
+            this.Country = new HashSet<Country>();
         }
     
         public int Id { get; set; }
@@ -30,12 +30,12 @@ namespace Practice.Componens
         public Nullable<int> UnitMeasurementId { get; set; }
         public string Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CountryProduct> CountryProduct { get; set; }
         public virtual UnitMeasurement UnitMeasurement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductOrder> ProductOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductShipment> ProductShipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Country> Country { get; set; }
     }
 }

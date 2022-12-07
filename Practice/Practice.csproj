@@ -76,9 +76,7 @@
     <Compile Include="Componens\Country.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Componens\CountryProduct.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Componens\Country.Extension.cs" />
     <Compile Include="Componens\Gender.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -147,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyPages\OrderSavePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyPages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +163,9 @@
     </Compile>
     <Compile Include="MyPages\ListproductPage.xaml.cs">
       <DependentUpon>ListproductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPages\OrderSavePage.xaml.cs">
+      <DependentUpon>OrderSavePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyPages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>

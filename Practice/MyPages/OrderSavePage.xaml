@@ -1,0 +1,46 @@
+﻿<Page x:Class="Practice.MyPages.OrderSavepage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practice.MyPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderSavepage">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock>Продукт</TextBlock>
+                <TextBox x:Name="Name" Width="100" ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock>Клиент</TextBlock>
+                <TextBox x:Name="CustomerTb" Width="100" ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock >Ответсвенный</TextBlock>
+                <TextBox x:Name="ExecutorTb" Width="100" ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock>Стадия</TextBlock>
+                <ComboBox x:Name="StageTb" Width="100" >
+                    <ComboBoxItem Tag="1">Создан</ComboBoxItem>
+                    <ComboBoxItem Tag="2">В процессе разрабботки</ComboBoxItem>
+                    <ComboBoxItem Tag="3">Передан в доставку</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock>Количестов</TextBlock>
+                <TextBox x:Name="QuntitiTb" Width="100" ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock>Сумма</TextBlock>
+                <TextBox x:Name="SummTb" Width="59" ></TextBox>
+            </StackPanel>
+            
+            <Button  x:Name="SaveBt" Content="Создать"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Page>

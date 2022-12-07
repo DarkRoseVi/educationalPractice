@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Practice.MyPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
       Title="EditingPage">
 
     <Grid>
@@ -15,29 +16,36 @@
             <StackPanel >
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock>Name</TextBlock>
-                    <TextBox x:Name="NameTb" Text="{Binding Name}" Margin="5" Width="150"></TextBox>
+                    <TextBox x:Name="NameTb" Text="{Binding product.Name}" Margin="5" Width="150"></TextBox>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock>Cost</TextBlock>
-                    <TextBox x:Name="CostTb" Text="{Binding Cost}" Margin="5" Width="150"></TextBox>
+                    <TextBox x:Name="CostTb" Text="{Binding product.Cost}" Margin="5" Width="150"></TextBox>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock>Date</TextBlock>
-                    <TextBox x:Name="DateTb" Text="{Binding Date}" Margin="5" Width="150"></TextBox>
+                    <TextBox x:Name="DateTb" Text="{Binding product.Date}" Margin="5" Width="150"></TextBox>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock>UnitMeasurement</TextBlock>
-                    <TextBox x:Name="CostBt" Text="{Binding UnitMeasurementId}" Margin="5" Width="150"></TextBox>
+                    <!--<TextBox x:Name="CostBt" Text="{Binding UnitMeasurementId}" Margin="5" Width="150"></TextBox>-->
+                    <ComboBox x:Name="UnitMeasurementCb" ItemsSource="{Binding MesreUnits}" SelectedIndex="{Binding product.UnitMeasurementId}" SelectionChanged="UnitMeasurementCb_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ComboBoxItem Tag="{Binding Title}" Content="{Binding Title}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock>Description</TextBlock>
-                    <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding Description}"></TextBox>
+                    <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding product.Description}"></TextBox>
                 </StackPanel>
                 <Button x:Name="SaveBtn" Content="Схранить изменения" Margin="5" Click="SaveBtn_Click" ></Button>
             </StackPanel>
         </StackPanel>
         <StackPanel  HorizontalAlignment="Center" Orientation="Vertical"  VerticalAlignment="Top" Margin="70">
-            <Image x:Name="ProductPhoto" Source="{Binding Photo}"  Width="150" Height="150"></Image>
+            <Image x:Name="ProductPhoto" Source="{Binding product.Photo}"  Width="150" Height="150"></Image>
             <Button x:Name="AddBt" Content="Добавить"  Style="{StaticResource Butpage}" Click="AddBt_Click"></Button>
         </StackPanel>
     </Grid>

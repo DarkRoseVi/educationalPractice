@@ -15,11 +15,11 @@
         </EntityType>
         <EntityType Name="CountryProduct">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ContryId" />
+            <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ContryId" Type="int" />
-          <Property Name="ProductId" Type="int" />
+          <Property Name="ContryId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -156,8 +156,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CountryProduct_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+        <Association Name="FK_CountryProduct_Country1">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="CountryProduct" Type="Self.CountryProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -168,8 +168,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CountryProduct_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+        <Association Name="FK_CountryProduct_Product1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="CountryProduct" Type="Self.CountryProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -311,11 +311,11 @@
             <End Role="Roly" EntitySet="Roly" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_CountryProduct_Country" Association="Self.FK_CountryProduct_Country">
+          <AssociationSet Name="FK_CountryProduct_Country1" Association="Self.FK_CountryProduct_Country1">
             <End Role="Country" EntitySet="Country" />
             <End Role="CountryProduct" EntitySet="CountryProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_CountryProduct_Product" Association="Self.FK_CountryProduct_Product">
+          <AssociationSet Name="FK_CountryProduct_Product1" Association="Self.FK_CountryProduct_Product1">
             <End Role="Product" EntitySet="Product" />
             <End Role="CountryProduct" EntitySet="CountryProduct" />
           </AssociationSet>
@@ -360,6 +360,69 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProductViModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProductViEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Country" EntityType="ProductViModel.Country" />
+          <EntitySet Name="Gender" EntityType="ProductViModel.Gender" />
+          <EntitySet Name="Order" EntityType="ProductViModel.Order" />
+          <EntitySet Name="Product" EntityType="ProductViModel.Product" />
+          <EntitySet Name="ProductOrder" EntityType="ProductViModel.ProductOrder" />
+          <EntitySet Name="ProductShipment" EntityType="ProductViModel.ProductShipment" />
+          <EntitySet Name="Provider" EntityType="ProductViModel.Provider" />
+          <EntitySet Name="Roly" EntityType="ProductViModel.Roly" />
+          <EntitySet Name="Shipment" EntityType="ProductViModel.Shipment" />
+          <EntitySet Name="Stage" EntityType="ProductViModel.Stage" />
+          <EntitySet Name="sysdiagrams" EntityType="ProductViModel.sysdiagrams" />
+          <EntitySet Name="UnitMeasurement" EntityType="ProductViModel.UnitMeasurement" />
+          <EntitySet Name="User" EntityType="ProductViModel.User" />
+          <AssociationSet Name="FK_Client_Gender" Association="ProductViModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Stage" Association="ProductViModel.FK_Order_Stage">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="ProductViModel.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="ProductViModel.FK_Order_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_Order" Association="ProductViModel.FK_ProductOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UnitMeasurement" Association="ProductViModel.FK_Product_UnitMeasurement">
+            <End Role="UnitMeasurement" EntitySet="UnitMeasurement" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_Product" Association="ProductViModel.FK_ProductOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductShipment_Product" Association="ProductViModel.FK_ProductShipment_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductShipment" EntitySet="ProductShipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductShipment_Shipment" Association="ProductViModel.FK_ProductShipment_Shipment">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="ProductShipment" EntitySet="ProductShipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Provider1" Association="ProductViModel.FK_Shipment_Provider1">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Roly" Association="ProductViModel.FK_Client_Roly">
+            <End Role="Roly" EntitySet="Roly" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="CountryProduct" Association="ProductViModel.CountryProduct">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -367,17 +430,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CountryProduct" Relationship="Self.FK_CountryProduct_Country" FromRole="Country" ToRole="CountryProduct" />
-        </EntityType>
-        <EntityType Name="CountryProduct">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ContryId" Type="Int32" />
-          <Property Name="ProductId" Type="Int32" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_CountryProduct_Country" FromRole="CountryProduct" ToRole="Country" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_CountryProduct_Product" FromRole="CountryProduct" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ProductViModel.CountryProduct" FromRole="Country" ToRole="Product" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -397,26 +450,26 @@
           <Property Name="ExecutorId" Type="Int32" />
           <Property Name="Sum" Type="Int32" />
           <Property Name="StageId" Type="Int32" />
-          <NavigationProperty Name="Stage" Relationship="Self.FK_Order_Stage" FromRole="Order" ToRole="Stage" />
-          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Order" FromRole="Order" ToRole="ProductOrder" />
+          <NavigationProperty Name="Stage" Relationship="ProductViModel.FK_Order_Stage" FromRole="Order" ToRole="Stage" />
           <NavigationProperty Name="User" Relationship="ProductViModel.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="ProductViModel.FK_Order_User1" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="ProductOrder" Relationship="ProductViModel.FK_ProductOrder_Order" FromRole="Order" ToRole="ProductOrder" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Cost" Type="Int32" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="UnitMeasurementId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CountryProduct" Relationship="Self.FK_CountryProduct_Product" FromRole="Product" ToRole="CountryProduct" />
-          <NavigationProperty Name="UnitMeasurement" Relationship="Self.FK_Product_UnitMeasurement" FromRole="Product" ToRole="UnitMeasurement" />
-          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
-          <NavigationProperty Name="ProductShipment" Relationship="Self.FK_ProductShipment_Product" FromRole="Product" ToRole="ProductShipment" />
+          <NavigationProperty Name="UnitMeasurement" Relationship="ProductViModel.FK_Product_UnitMeasurement" FromRole="Product" ToRole="UnitMeasurement" />
+          <NavigationProperty Name="ProductOrder" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
+          <NavigationProperty Name="ProductShipment" Relationship="ProductViModel.FK_ProductShipment_Product" FromRole="Product" ToRole="ProductShipment" />
+          <NavigationProperty Name="Country" Relationship="ProductViModel.CountryProduct" FromRole="Product" ToRole="Country" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -426,8 +479,8 @@
           <Property Name="ProdutId" Type="Int32" />
           <Property Name="OrderId" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="ProductViModel.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductShipment">
           <Key>
@@ -438,8 +491,8 @@
           <Property Name="ShipmentId" Type="Int32" />
           <Property Name="PurchasePrice" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductShipment_Product" FromRole="ProductShipment" ToRole="Product" />
-          <NavigationProperty Name="Shipment" Relationship="Self.FK_ProductShipment_Shipment" FromRole="ProductShipment" ToRole="Shipment" />
+          <NavigationProperty Name="Product" Relationship="ProductViModel.FK_ProductShipment_Product" FromRole="ProductShipment" ToRole="Product" />
+          <NavigationProperty Name="Shipment" Relationship="ProductViModel.FK_ProductShipment_Shipment" FromRole="ProductShipment" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -447,7 +500,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Shipment" Relationship="Self.FK_Shipment_Provider1" FromRole="Provider" ToRole="Shipment" />
+          <NavigationProperty Name="Shipment" Relationship="ProductViModel.FK_Shipment_Provider1" FromRole="Provider" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="Roly">
           <Key>
@@ -465,8 +518,8 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="ProviderId" Type="Int32" />
           <Property Name="Sum" Type="Int32" />
-          <NavigationProperty Name="ProductShipment" Relationship="Self.FK_ProductShipment_Shipment" FromRole="Shipment" ToRole="ProductShipment" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Shipment_Provider1" FromRole="Shipment" ToRole="Provider" />
+          <NavigationProperty Name="ProductShipment" Relationship="ProductViModel.FK_ProductShipment_Shipment" FromRole="Shipment" ToRole="ProductShipment" />
+          <NavigationProperty Name="Provider" Relationship="ProductViModel.FK_Shipment_Provider1" FromRole="Shipment" ToRole="Provider" />
         </EntityType>
         <EntityType Name="Stage">
           <Key>
@@ -474,192 +527,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Stage" FromRole="Stage" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="ProductViModel.FK_Order_Stage" FromRole="Stage" ToRole="Order" />
         </EntityType>
-        <EntityType Name="UnitMeasurement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_UnitMeasurement" FromRole="UnitMeasurement" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_CountryProduct_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="CountryProduct" Type="Self.CountryProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CountryProduct">
-              <PropertyRef Name="ContryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CountryProduct_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="CountryProduct" Type="Self.CountryProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CountryProduct">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Stage">
-          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Stage">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="StageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrder_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
-          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_UnitMeasurement">
-          <End Role="UnitMeasurement" Type="Self.UnitMeasurement" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UnitMeasurement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="UnitMeasurementId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrder_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="ProdutId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductShipment_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductShipment" Type="Self.ProductShipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductShipment">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductShipment_Shipment">
-          <End Role="Shipment" Type="Self.Shipment" Multiplicity="0..1" />
-          <End Role="ProductShipment" Type="Self.ProductShipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shipment">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductShipment">
-              <PropertyRef Name="ShipmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Shipment_Provider1">
-          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
-          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Shipment">
-              <PropertyRef Name="ProviderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ProductViEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Country" EntityType="Self.Country" />
-          <EntitySet Name="CountryProduct" EntityType="Self.CountryProduct" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
-          <EntitySet Name="ProductShipment" EntityType="Self.ProductShipment" />
-          <EntitySet Name="Provider" EntityType="Self.Provider" />
-          <EntitySet Name="Roly" EntityType="Self.Roly" />
-          <EntitySet Name="Shipment" EntityType="Self.Shipment" />
-          <EntitySet Name="Stage" EntityType="Self.Stage" />
-          <EntitySet Name="UnitMeasurement" EntityType="Self.UnitMeasurement" />
-          <AssociationSet Name="FK_CountryProduct_Country" Association="Self.FK_CountryProduct_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="CountryProduct" EntitySet="CountryProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CountryProduct_Product" Association="Self.FK_CountryProduct_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="CountryProduct" EntitySet="CountryProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Stage" Association="Self.FK_Order_Stage">
-            <End Role="Stage" EntitySet="Stage" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_Order" Association="Self.FK_ProductOrder_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_UnitMeasurement" Association="Self.FK_Product_UnitMeasurement">
-            <End Role="UnitMeasurement" EntitySet="UnitMeasurement" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_Product" Association="Self.FK_ProductOrder_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductShipment_Product" Association="Self.FK_ProductShipment_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductShipment" EntitySet="ProductShipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductShipment_Shipment" Association="Self.FK_ProductShipment_Shipment">
-            <End Role="Shipment" EntitySet="Shipment" />
-            <End Role="ProductShipment" EntitySet="ProductShipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Provider1" Association="Self.FK_Shipment_Provider1">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="ProductViModel.sysdiagrams" />
-          <EntitySet Name="User" EntityType="ProductViModel.User" />
-          <AssociationSet Name="FK_Client_Gender" Association="ProductViModel.FK_Client_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User" Association="ProductViModel.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User1" Association="ProductViModel.FK_Order_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_Roly" Association="ProductViModel.FK_Client_Roly">
-            <End Role="Roly" EntitySet="Roly" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -669,6 +538,14 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UnitMeasurement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="ProductViModel.FK_Product_UnitMeasurement" FromRole="UnitMeasurement" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -701,6 +578,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Stage">
+          <End Type="ProductViModel.Stage" Role="Stage" Multiplicity="0..1" />
+          <End Type="ProductViModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_User">
           <End Type="ProductViModel.User" Role="User" Multiplicity="0..1" />
           <End Type="ProductViModel.Order" Role="Order" Multiplicity="*" />
@@ -725,6 +614,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductOrder_Order">
+          <End Type="ProductViModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_UnitMeasurement">
+          <End Type="ProductViModel.UnitMeasurement" Role="UnitMeasurement" Multiplicity="0..1" />
+          <End Type="ProductViModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitMeasurement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="UnitMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrder_Product">
+          <End Type="ProductViModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="ProdutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductShipment_Product">
+          <End Type="ProductViModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="ProductViModel.ProductShipment" Role="ProductShipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductShipment">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductShipment_Shipment">
+          <End Type="ProductViModel.Shipment" Role="Shipment" Multiplicity="0..1" />
+          <End Type="ProductViModel.ProductShipment" Role="ProductShipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductShipment">
+              <PropertyRef Name="ShipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_Provider1">
+          <End Type="ProductViModel.Provider" Role="Provider" Multiplicity="0..1" />
+          <End Type="ProductViModel.Shipment" Role="Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Client_Roly">
           <End Type="ProductViModel.Roly" Role="Roly" Multiplicity="0..1" />
           <End Type="ProductViModel.User" Role="User" Multiplicity="*" />
@@ -737,7 +698,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="CountryProduct">
+          <End Type="ProductViModel.Country" Role="Country" Multiplicity="*" />
+          <End Type="ProductViModel.Product" Role="Product" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -746,114 +711,97 @@
           <EntitySetMapping Name="Country">
             <EntityTypeMapping TypeName="ProductViModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CountryProduct">
-            <EntityTypeMapping TypeName="ProductViModel.CountryProduct">
-              <MappingFragment StoreEntitySet="CountryProduct">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ContryId" ColumnName="ContryId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gender">
             <EntityTypeMapping TypeName="ProductViModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="ProductViModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ExecutorId" ColumnName="ExecutorId" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="StageId" ColumnName="StageId" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="ExecutorId" ColumnName="ExecutorId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="ProductViModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UnitMeasurementId" ColumnName="UnitMeasurementId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitMeasurementId" ColumnName="UnitMeasurementId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductOrder">
             <EntityTypeMapping TypeName="ProductViModel.ProductOrder">
               <MappingFragment StoreEntitySet="ProductOrder">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ProdutId" ColumnName="ProdutId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProdutId" ColumnName="ProdutId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductShipment">
             <EntityTypeMapping TypeName="ProductViModel.ProductShipment">
               <MappingFragment StoreEntitySet="ProductShipment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
-                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provider">
             <EntityTypeMapping TypeName="ProductViModel.Provider">
               <MappingFragment StoreEntitySet="Provider">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roly">
             <EntityTypeMapping TypeName="ProductViModel.Roly">
               <MappingFragment StoreEntitySet="Roly">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shipment">
             <EntityTypeMapping TypeName="ProductViModel.Shipment">
               <MappingFragment StoreEntitySet="Shipment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
                 <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stage">
             <EntityTypeMapping TypeName="ProductViModel.Stage">
               <MappingFragment StoreEntitySet="Stage">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UnitMeasurement">
-            <EntityTypeMapping TypeName="ProductViModel.UnitMeasurement">
-              <MappingFragment StoreEntitySet="UnitMeasurement">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -865,6 +813,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitMeasurement">
+            <EntityTypeMapping TypeName="ProductViModel.UnitMeasurement">
+              <MappingFragment StoreEntitySet="UnitMeasurement">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -884,6 +840,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="CountryProduct" TypeName="ProductViModel.CountryProduct" StoreEntitySet="CountryProduct">
+            <EndProperty Name="Product">
+              <ScalarProperty Name="Id" ColumnName="ProductId" />
+            </EndProperty>
+            <EndProperty Name="Country">
+              <ScalarProperty Name="Id" ColumnName="ContryId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
