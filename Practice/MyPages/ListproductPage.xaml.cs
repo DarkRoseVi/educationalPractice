@@ -42,6 +42,16 @@ namespace Practice.MyPages
             BdConect.db.Product.Load();
             products = BdConect.db.Product.Local;
             InitializeComponent();
+            if (Navigation.AutoUser.RolyId == 1)
+                AddProdBt.Visibility = Visibility.Collapsed;
+          else if ( Navigation.AutoUser.RolyId == 2 && Navigation.AutoUser.RolyId == 3 )
+                OrderBt.Visibility = Visibility.Collapsed;
+
+                //EditingBt.Visibility = Visibility.Collapsed;
+            //else if (Navigation.AutoUser.RolyId == 1)
+
+
+
         }
         public void Rechres()
         {
@@ -64,7 +74,6 @@ namespace Practice.MyPages
                 }
             }
 
-            products = pr;
             if (FiltrCb.SelectedItem != null)
             {
                 switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
@@ -82,28 +91,37 @@ namespace Practice.MyPages
                         break;
                 }
             }
-            products = pr;
-
+  
 
             ProductListViu.ItemsSource = pr.ToArray();
-            if (QuantityCb.SelectedIndex > 0 && pr.Count > 0)
+            if (QuantityCb.SelectedIndex > -1 && pr.Count > 0)
             {
-                int selCount = Convert.ToInt32((QuantityCb.SelectedItem as ComboBoxItem).Content);
-                pr = new ObservableCollection<Product>(pr.Skip(selCount * actualPage).Take(selCount));
-                if (pr.Count() == 0)
+                int selCount;
+                if ((QuantityCb.SelectedItem as ComboBoxItem).Content.ToString()=="Все")
                 {
-                    actualPage--;
-                    Rechres();
+                    products = BdConect.db.Product.Local;
+                }
+                else
+                {
+                    selCount = Convert.ToInt32((QuantityCb.SelectedItem as ComboBoxItem).Content);
+
+                    products = new ObservableCollection<Product>(products.Skip(selCount * actualPage).Take(selCount));
+                    if (products.Count() == 0)
+                    {
+                        actualPage--;
+                        Rechres();
+                    }
                 }
             }
+       
 
-            //filterSevice = filterSevice.Where(x => x.Title.StartsWith(NameDisSearch.Text) || x.Description.StartsWith(NameDisSearch.Text));
-
-            if (PoiskTb.Text.Length > 0)
+            if (PoiskTb.Text.Length>0)
             {
-                pr = new ObservableCollection<Product>(products.Where(x => x.Name.StartsWith(PoiskTb.Text)));
+                //ProductListViu.ItemsSource = BdConect.db.Product.Where(x => x.Name.Contains(PoiskTb.Text)).ToList();
+                pr = new ObservableCollection<Product>(products.Where(x => x.Name.Contains(PoiskTb.Text) || x.Description.Contains(PoiskTb.Text)));
+             
             }
-            else 
+            else
             {
                 pr = BdConect.db.Product.Local;
             }
@@ -111,18 +129,10 @@ namespace Practice.MyPages
 
 
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var Prod = (sender as Button).DataContext as Product;
-            Navigation.NextPage(new Nav("Редкатирование", new EditingPage(Prod)));
-        }
-
         private void SortCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Rechres();
         }
-
-
 
         private void RightBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -153,6 +163,26 @@ namespace Practice.MyPages
            // Navigation.NextPage(new Nav("Создание заказа", new OrderSavepage()));
         }
 
-        
+        private void AddProdBt_Click(object sender, RoutedEventArgs e)
+        {
+           
+            Navigation.NextPage(new Nav("",new EditingPage(new Product())));
+        }
+
+        private void EditingBt_Click(object sender, RoutedEventArgs e)
+        {
+            var Prod = (sender as Button).DataContext as Product;
+          Navigation.NextPage(new Nav("Редкатирование", new EditingPage(Prod)));
+        }
+
+        private void OrderBt_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NextPage(new Nav("Заказы", new OrderPage()));
+        }
+
+        private void QuantityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+             Rechres();
+        }
     }
 }

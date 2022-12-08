@@ -123,6 +123,16 @@ namespace Practice.MyPages
             
          
         }
+
+        private void DeletBt_Click(object sender, RoutedEventArgs e)
+        {
+             LoginTb.Text= " ";
+            PasswordTb.Password = "";
+           LastNameTb.Text = " ";
+             FirstNameTb.Text = " ";
+          PatronymicTb.Text=" ";
+          Password2Tb.Password="";
+        }
     }
 }
 

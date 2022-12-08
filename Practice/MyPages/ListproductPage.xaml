@@ -18,7 +18,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
             <StackPanel Margin="5" Width="150">
                 <TextBlock  HorizontalAlignment="Center">Количество запсией</TextBlock>
-                <ComboBox x:Name="QuantityCb" Margin="10">
+                <ComboBox x:Name="QuantityCb" Margin="10" SelectionChanged="QuantityCb_SelectionChanged">
                     <ComboBoxItem Tag="1">5</ComboBoxItem>
                     <ComboBoxItem Tag="2">10</ComboBoxItem>
                     <ComboBoxItem Tag="3">20</ComboBoxItem>
@@ -80,8 +80,8 @@
                                 <TextBlock Text="{Binding Date }"></TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                                <Button Content="Заявка" Style="{StaticResource Butpage}" HorizontalAlignment="Left" Click="Button_Click_1"></Button>
-                                <Button Content="Редактирование" Style="{StaticResource Butpage}" HorizontalAlignment="Left" Click="Button_Click"></Button>
+                                <Button Content="Заявка" Style="{StaticResource Butpage}"  Visibility="{Binding BtnVisible }" HorizontalAlignment="Left" Click="Button_Click_1"></Button>
+                                <Button Content="Редактирование" x:Name="EditingBt" Style="{StaticResource Butpage}" Visibility="{Binding BtnVisible}" HorizontalAlignment="Left" Click="EditingBt_Click"></Button>
                             </StackPanel>
 
                             <ListBox Grid.Row="2" ItemsSource="{Binding Path=Country}">
@@ -92,7 +92,7 @@
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" Background="{Binding Brush}"></TextBlock>
+                                        <TextBlock Text="{Binding Name}" Background="{Binding `}"></TextBlock>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                                 </ListBox>
@@ -111,7 +111,8 @@
             <TextBlock x:Name="FondCount"  Width="50" Margin="5"></TextBlock>
             <TextBlock x:Name="GeneralCount" Margin="5" Width="50"></TextBlock>
             <Button Content="&gt;" x:Name="RightBtn"  Margin="10 0" Width ="30" Click="RightBtn_Click"></Button>
-
+            <Button x:Name="AddProdBt" Content="Добавить продукт" Margin="10" Click="AddProdBt_Click"></Button>
+            <Button x:Name="OrderBt" Content="Заказы" Margin="10" Click="OrderBt_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>

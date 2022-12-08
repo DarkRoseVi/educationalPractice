@@ -10,19 +10,34 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock>Login</TextBlock>
-            <TextBox x:Name="LoginTb" Width="100"></TextBox>
-            <TextBlock>Password</TextBlock>
-            <PasswordBox x:Name="PasswordTb" Width="100"></PasswordBox>
-            <TextBlock>Password2</TextBlock>
-            <PasswordBox x:Name="Password2Tb" Width="100"></PasswordBox>
-            <TextBlock>Last Name</TextBlock>
-            <TextBox x:Name="LastNameTb" Width="100"></TextBox>
-            <TextBlock>First Name</TextBlock>
-            <TextBox x:Name="FirstNameTb" Width="100"></TextBox>
-            <TextBlock>Patronymic</TextBlock>
-            <TextBox x:Name="PatronymicTb" Width="100"></TextBox>
-            <Button x:Name="RegBt" Content="Зарегистрироваться" Margin="5" Click="RegBt_Click"></Button>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock>Логин</TextBlock>
+                <TextBox x:Name="LoginTb" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock>Пароль</TextBlock>
+                <PasswordBox x:Name="PasswordTb" Width="100"></PasswordBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock>Повторите пароль</TextBlock>
+                <PasswordBox x:Name="Password2Tb" Width="100"></PasswordBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock>Фамилия</TextBlock>
+                <TextBox x:Name="LastNameTb" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock>Имя</TextBlock>
+                <TextBox x:Name="FirstNameTb" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <TextBlock>Отчество</TextBlock>
+                <TextBox x:Name="PatronymicTb" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="RegBt" Content="Зарегистрироваться" Margin="10" Click="RegBt_Click"></Button>
+                <Button x:Name="DeletBt" Content="Очистить" Margin="10" Click="DeletBt_Click" ></Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

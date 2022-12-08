@@ -14,22 +14,22 @@
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Margin="30">
 
             <StackPanel >
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock>Name</TextBlock>
-                    <TextBox x:Name="NameTb" Text="{Binding product.Name}" Margin="5" Width="150"></TextBox>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock>Наименование продукта</TextBlock>
+                    <TextBox x:Name="NameTb" Text="{Binding product.Name}"   Style="{StaticResource TitleAdd}"></TextBox>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock>Cost</TextBlock>
-                    <TextBox x:Name="CostTb" Text="{Binding product.Cost}" Margin="5" Width="150"></TextBox>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock>Стомость</TextBlock>
+                    <TextBox x:Name="CostTb" Text="{Binding product.Cost}" Style="{StaticResource TitleAdd}"></TextBox>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock>Date</TextBlock>
-                    <TextBox x:Name="DateTb" Text="{Binding product.Date}" Margin="5" Width="150"></TextBox>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock>Дата поступления</TextBlock>
+                    <TextBox x:Name="DateTb" Text="{Binding product.Date}"  Style="{StaticResource TitleAdd}"></TextBox>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock>UnitMeasurement</TextBlock>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock>Еденица измерения</TextBlock>
                     <!--<TextBox x:Name="CostBt" Text="{Binding UnitMeasurementId}" Margin="5" Width="150"></TextBox>-->
-                    <ComboBox x:Name="UnitMeasurementCb" ItemsSource="{Binding MesreUnits}" SelectedIndex="{Binding product.UnitMeasurementId}" SelectionChanged="UnitMeasurementCb_SelectionChanged">
+                    <ComboBox x:Name="UnitMeasurementCb" ItemsSource="{Binding MesreUnits}" SelectedIndex="{Binding product.UnitMeasurementId}" SelectionChanged="UnitMeasurementCb_SelectionChanged" Width="150" Margin="5">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <ComboBoxItem Tag="{Binding Title}" Content="{Binding Title}"/>
@@ -37,15 +37,15 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock>Description</TextBlock>
-                    <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding product.Description}"></TextBox>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock>Описание</TextBlock>
+                    <TextBox x:Name="DesBt" Height="100" Width="200" Text="{Binding product.Description}"  Style="{StaticResource TitleAdd}"></TextBox>
                 </StackPanel>
-                <Button x:Name="SaveBtn" Content="Схранить изменения" Margin="5" Click="SaveBtn_Click" ></Button>
+                <Button  x:Name="SaveBtn" Content="Схранить изменения"  Click="SaveBtn_Click"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel  HorizontalAlignment="Center" Orientation="Vertical"  VerticalAlignment="Top" Margin="70">
-            <Image x:Name="ProductPhoto" Source="{Binding product.Photo}"  Width="150" Height="150"></Image>
+        <StackPanel  HorizontalAlignment="Center" Orientation="Vertical"  VerticalAlignment="Top" Margin="250 30 0 0">
+            <Image x:Name="ProductPhoto" Source="{Binding product.Photo}"  Width="200" Height="200"></Image>
             <Button x:Name="AddBt" Content="Добавить"  Style="{StaticResource Butpage}" Click="AddBt_Click"></Button>
         </StackPanel>
     </Grid>

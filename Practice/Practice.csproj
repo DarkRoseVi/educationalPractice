@@ -99,9 +99,11 @@
     <Compile Include="Componens\Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Componens\Order.Extension.cs" />
     <Compile Include="Componens\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Componens\Product.Extension.cs" />
     <Compile Include="Componens\ProductOrder.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -129,6 +131,7 @@
     <Compile Include="Componens\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Componens\User.Extension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -142,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyPages\ListproductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPages\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPages\OrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +174,12 @@
     </Compile>
     <Compile Include="MyPages\ListproductPage.xaml.cs">
       <DependentUpon>ListproductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPages\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPages\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyPages\OrderSavePage.xaml.cs">
       <DependentUpon>OrderSavePage.xaml</DependentUpon>

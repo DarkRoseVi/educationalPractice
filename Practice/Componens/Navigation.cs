@@ -23,7 +23,7 @@ namespace Practice.Componens
             main.MyTitle.Text = nav.Title;
             main.MyFarame.Navigate(nav.Page);
             main.BackBtn.Visibility = navs.Count > 1 ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-        
+        main.ExitBtn.Visibility = IsUser == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
         public static void BackPage()
             {

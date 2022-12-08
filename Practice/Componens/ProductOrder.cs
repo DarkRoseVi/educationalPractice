@@ -14,9 +14,8 @@ namespace Practice.Componens
     
     public partial class ProductOrder
     {
-        public int Id { get; set; }
-        public Nullable<int> ProdutId { get; set; }
-        public Nullable<int> OrderId { get; set; }
+        public int ProdutId { get; set; }
+        public int OrderId { get; set; }
         public Nullable<int> Quantity { get; set; }
     
         public virtual Order Order { get; set; }
