@@ -11,18 +11,9 @@
       Title="OrderPage">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="61*"/>
-            <RowDefinition Height="389*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <TextBlock>Сатусы заказов</TextBlock>
-            <ComboBox Width="100" HorizontalAlignment="Left">
-                <ComboBoxItem>новый</ComboBoxItem>
-                <ComboBoxItem>Созданный</ComboBoxItem>
-            </ComboBox>
-        </StackPanel>
-        <ListView ItemsSource="{Binding orders}" x:Name="OrdertListViu" Grid.Row ="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+       
+
+        <ListView ItemsSource="{Binding orders}" x:Name="OrdertListViu"  d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border>

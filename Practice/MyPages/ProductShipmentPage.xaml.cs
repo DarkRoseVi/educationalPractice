@@ -17,18 +17,15 @@ using System.Windows.Shapes;
 namespace Practice.MyPages
 {
     /// <summary>
-    /// Логика взаимодействия для Menu.xaml
+    /// Логика взаимодействия для ProductShipmentPage.xaml
     /// </summary>
-    public partial class Menu : Page
+    public partial class ProductShipmentPage : Page
     {
-        public Menu()
+        public ProductShipmentPage()
         {
             InitializeComponent();
+            SiplementLW.ItemsSource = BdConect.db.ProductShipment.ToList();
         }
 
-        private void OrderBt_Click(object sender, RoutedEventArgs e)
-        {
-            Navigation.NextPage(new Nav("sdf", new OrderPage()));
-        }
     }
 }

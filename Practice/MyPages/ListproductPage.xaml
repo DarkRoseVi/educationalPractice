@@ -19,14 +19,15 @@
             <StackPanel Margin="5" Width="150">
                 <TextBlock  HorizontalAlignment="Center">Количество запсией</TextBlock>
                 <ComboBox x:Name="QuantityCb" Margin="10" SelectionChanged="QuantityCb_SelectionChanged">
-                    <ComboBoxItem Tag="1">5</ComboBoxItem>
-                    <ComboBoxItem Tag="2">10</ComboBoxItem>
-                    <ComboBoxItem Tag="3">20</ComboBoxItem>
+                    <ComboBoxItem>Все</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem>10</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Margin="5" Width="150">
                 <TextBlock  HorizontalAlignment="Center">Сортировка</TextBlock>
-                <ComboBox x:Name="SortCb" Margin="10" SelectionChanged="SortCb_SelectionChanged">
+                <ComboBox x:Name="SortCb" Margin="10" SelectionChanged="SortCb_SelectionChanged" >
                     <ComboBoxItem Tag="1">от А до Я</ComboBoxItem>
                     <ComboBoxItem Tag="2">от Я до А</ComboBoxItem>
                     <ComboBoxItem Tag="3">все</ComboBoxItem>
@@ -45,10 +46,11 @@
                 <TextBox x:Name="PoiskTb" Margin="10"  Width="250" TextChanged="PoiskTb_TextChanged"></TextBox>
             </StackPanel>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding ElementName=Root, Path=products}" d:ItemsSource="{d:SampleData ItemCount=5}"  x:Name="ProductListViu" >
+        <!--ItemsSource="{Binding ElementName=Root, Path=products}"-->
+        <ListView Grid.Row="1"  d:ItemsSource="{d:SampleData ItemCount=5}"  x:Name="ProductListViu" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border>
+                    <Border >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="150"></RowDefinition>
@@ -72,6 +74,7 @@
 
                                 <TextBlock>Стоимость</TextBlock>
                                 <TextBlock Text="{Binding Cost}"></TextBlock>
+                                <TextBlock Text="{Binding Activ}" Foreground="{Binding ColorDis}"></TextBlock>
                                 <TextBlock>Описание</TextBlock>
                                 <TextBlock Text="{Binding Description}"></TextBlock>
                                 <TextBlock>Единица измерения</TextBlock>
@@ -80,7 +83,7 @@
                                 <TextBlock Text="{Binding Date }"></TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                                <Button Content="Заявка" Style="{StaticResource Butpage}"  Visibility="{Binding BtnVisible }" HorizontalAlignment="Left" Click="Button_Click_1"></Button>
+                                <Button Content="Заявка" Style="{StaticResource Butpage}"  HorizontalAlignment="Left" Click="Button_Click_1"></Button>
                                 <Button Content="Редактирование" x:Name="EditingBt" Style="{StaticResource Butpage}" Visibility="{Binding BtnVisible}" HorizontalAlignment="Left" Click="EditingBt_Click"></Button>
                             </StackPanel>
 
@@ -92,7 +95,7 @@
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" Background="{Binding `}"></TextBlock>
+                                        <TextBlock Text="{Binding Name}" Background="{Binding Brush}"></TextBlock>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                                 </ListBox>
@@ -110,9 +113,10 @@
 
             <TextBlock x:Name="FondCount"  Width="50" Margin="5"></TextBlock>
             <TextBlock x:Name="GeneralCount" Margin="5" Width="50"></TextBlock>
-            <Button Content="&gt;" x:Name="RightBtn"  Margin="10 0" Width ="30" Click="RightBtn_Click"></Button>
-            <Button x:Name="AddProdBt" Content="Добавить продукт" Margin="10" Click="AddProdBt_Click"></Button>
+            <Button Content="&gt;" x:Name="RightBtn"  Margin="10 0" Width ="30" Click="RightBtn_Click" Visibility="{Binding BtnVisible}"></Button>
+            <Button x:Name="AddProdBt" Content="Добавить продукт" Margin="10" Click="AddProdBt_Click"  Visibility="{Binding BtnVisible}"></Button>
             <Button x:Name="OrderBt" Content="Заказы" Margin="10" Click="OrderBt_Click"></Button>
+            <Button x:Name="ShiplimentBtn" Click="ShiplimentBtn_Click"> Поставки</Button>
         </StackPanel>
     </Grid>
 </Page>

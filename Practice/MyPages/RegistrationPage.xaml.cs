@@ -75,20 +75,24 @@ namespace Practice.MyPages
 
                         if (password.Length >= 6)
                         {
-
+                            bool IsallUpper = false;
                             bool symbo = false;
                             bool number = true;
                             for (int i = 0; i < password.Length; i++)
                             {
                                 if (password[i] >= '0' && password[i] <= '9')
                                     number = true;
-                                if (password[i] == '_' || password[i] == '-' || password[i] == '!')
+                                if (password[i] == '!' || password[i] == '@' || password[i] == '#' || password[i] == '$' || password[i] == '%' || password[i] == '^')
                                     symbo = true;
+                                if (Char.IsUpper(password[i]))
+                                    IsallUpper = true;
                             }
                             if (symbo != true)
-                                MessageBox.Show("Добавьте один из символов _ - !");
+                                MessageBox.Show("Добавьте один из символов !  @ % # $ ^");
                             if (number != true)
                                 MessageBox.Show("Добавьте хотя бы 1 цифру ");
+                            if (IsallUpper != true)
+                                MessageBox.Show("Добавьте хотя бы 1 прописную букву ");
                         }
                         else
                         {

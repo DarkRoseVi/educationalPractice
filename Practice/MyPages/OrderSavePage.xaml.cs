@@ -24,15 +24,23 @@ namespace Practice.MyPages
     public partial class OrderSavepage : Page
     {
         Componens.Order order;
-        public OrderSavepage(Componens.Order order)
+        public OrderSavepage()
         {
           
             InitializeComponent();
             //order = _order;
+            ProductListViu.ItemsSource = BdConect.db.Product.ToList();
         }
         public static void refrashe()
         {
         
+        }
+
+        private void ViborBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductListViu.SelectedItem == null)
+                return;
+            Name.Text = (ProductListViu.SelectedItem as Product).Name;
         }
     }
 }

@@ -1,0 +1,44 @@
+﻿<Page x:Class="Practice.MyPages.ProductShipmentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practice.MyPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductShipmentPage">
+
+    <Grid>
+        <ListView  x:Name="SiplementLW"  d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="600"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock> Номер Поставки</TextBlock>
+                                <TextBlock Text="{Binding Id}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <TextBlock>Продукт</TextBlock>
+                                <TextBlock Text="{Binding ProductId}"></TextBlock>
+                                <TextBlock>Количетсво</TextBlock>
+                                <TextBlock Text="{Binding Quantity}"></TextBlock>
+                                <TextBlock>Стоимость</TextBlock>
+                                <TextBlock Text="{Binding PurchasePrice}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

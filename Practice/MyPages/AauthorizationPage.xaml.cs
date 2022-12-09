@@ -87,7 +87,7 @@ namespace Practice.MyPages
                 CountAuto = 0;
                 EntranceBtn.IsEnabled = false;
                 RegisterBtn.IsEnabled = false;
-                timer.Interval = new TimeSpan(0, 0, 30);
+                timer.Interval = new TimeSpan(0, 1, 0);
                 timer.Tick += new EventHandler(isVisibleBTN);
                 timer.Start();
             }

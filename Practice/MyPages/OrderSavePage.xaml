@@ -9,7 +9,11 @@
       Title="OrderSavepage">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Vertical" Grid.ColumnSpan="2" Margin="100" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <TextBlock>Продукт</TextBlock>
                 <TextBox x:Name="Name" Width="100" ></TextBox>
@@ -38,9 +42,51 @@
                 <TextBlock>Сумма</TextBlock>
                 <TextBox x:Name="SummTb" Width="59" ></TextBox>
             </StackPanel>
-            
+
             <Button  x:Name="SaveBt" Content="Создать"></Button>
+            <Button  x:Name="ViborBt" Content="Выбрать" Click="ViborBt_Click"></Button>
+
         </StackPanel>
-        
+      
+            
+            <ListView Grid.Column="2"  d:ItemsSource="{d:SampleData ItemCount=5}"  x:Name="ProductListViu" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Row="0" Grid.Column="0">
+                                    <TextBlock>Картинка</TextBlock>
+                                    <Image Source="{Binding Photo}"></Image>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock>Название</TextBlock>
+                                <TextBlock Text="{Binding Name}" Margin="5"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+                                <TextBlock>Стоимость</TextBlock>
+                                <TextBlock Text="{Binding Cost}"></TextBlock>
+                                <TextBlock Text="{Binding Activ}" Foreground="{Binding ColorDis}"></TextBlock>
+                                <TextBlock>Описание</TextBlock>
+                                <TextBlock Text="{Binding Description}"></TextBlock>
+                                <TextBlock>Единица измерения</TextBlock>
+                                <TextBlock Text="{Binding UnitMeasurement.Title}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
     </Grid>
 </Page>

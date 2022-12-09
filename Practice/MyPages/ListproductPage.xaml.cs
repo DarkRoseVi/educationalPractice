@@ -25,67 +25,86 @@ namespace Practice.MyPages
     {
         int actualPage = 0;
 
-        public ObservableCollection<Product> products
-        {
-            get { return (ObservableCollection<Product>)GetValue(productsProperty); }
-            set { SetValue(productsProperty, value); }
-        }
+        //public ObservableCollection<Product> products
+        //{
+        //    get { return (ObservableCollection<Product>)GetValue(productsProperty); }
+        //    set { SetValue(productsProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for products.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty productsProperty =
-            DependencyProperty.Register("products", typeof(ObservableCollection<Product>), typeof(ListproductPage));
+        //// Using a DependencyProperty as the backing store for products.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty productsProperty =
+        //    DependencyProperty.Register("products", typeof(ObservableCollection<Product>), typeof(ListproductPage));
 
 
 
         public ListproductPage()
         {
-            BdConect.db.Product.Load();
-            products = BdConect.db.Product.Local;
+            //BdConect.db.Product.Load();
+            //products = BdConect.db.Product.Local;
             InitializeComponent();
-            if (Navigation.AutoUser.RolyId == 1)
+          //  if (Navigation.AutoUser.RolyId == 2)
+          //      AddProdBt.Visibility = Visibility.Collapsed;
+          //else if ( Navigation.AutoUser.RolyId == 2 && Navigation.AutoUser.RolyId == 3 )
+          //      OrderBt.Visibility = Visibility.Collapsed;
+          if(Navigation.AutoUser.RolyId== 2)
+            {
                 AddProdBt.Visibility = Visibility.Collapsed;
-          else if ( Navigation.AutoUser.RolyId == 2 && Navigation.AutoUser.RolyId == 3 )
                 OrderBt.Visibility = Visibility.Collapsed;
-
-                //EditingBt.Visibility = Visibility.Collapsed;
+            }
+          else
+            {
+                AddProdBt.Visibility = Visibility.Visible;
+                OrderBt.Visibility = Visibility.Visible;
+            }
+            ProductListViu.ItemsSource = BdConect.db.Product.ToList();
+            //EditingBt.Visibility = Visibility.Collapsed;
             //else if (Navigation.AutoUser.RolyId == 1)
-
+            GeneralCount.Text = BdConect.db.Product.Count().ToString();
 
 
         }
         public void Rechres()
         {
-            ObservableCollection<Product> pr = products;
-            if (SortCb.SelectedItem !=null)
+            IEnumerable<Product> prodList = BdConect.db.Product;
+  
+            //ObservableCollection<Product> pr = products;
+            if (SortCb.SelectedItem != null)
             {
                 switch ((SortCb.SelectedItem as ComboBoxItem).Tag)
                 {
                     case "1":
-                        pr = new ObservableCollection<Product>(products.OrderBy(x => x.Name));
+                        //pr = new ObservableCollection<Product>(products.OrderBy(x => x.Name));
+                        prodList = prodList.OrderBy(x => x.Name);
                         break;
                     case "2":
-                        pr = new ObservableCollection<Product>(products.OrderByDescending(x => x.Name));
+                        //pr = new ObservableCollection<Product>(products.OrderByDescending(x => x.Name));
+                        prodList = prodList.OrderByDescending(x => x.Name);
                         break;
                     case "3":
-                        pr = BdConect.db.Product.Local;
+                        prodList = BdConect.db.Product;
+                        //pr = BdConect.db.Product.Local;
                         break;
                     default:
                         break;
                 }
             }
+   
 
             if (FiltrCb.SelectedItem != null)
             {
                 switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
                 {
                     case "1":
-                        pr = BdConect.db.Product.Local;
+                        prodList = BdConect.db.Product;
+                        //pr = BdConect.db.Product.Local;
                         break;
                     case "2":
-                        pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 1));
+                        //pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 1));
+                        prodList = prodList.Where(x =>x.UnitMeasurementId == 1);
                         break;
                     case "3":
-                        pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 2));
+                        //pr = new ObservableCollection<Product>(products.Where(x => x.UnitMeasurementId == 2));
+                        prodList = prodList.Where(x => x.UnitMeasurementId == 2);
                         break;
                     default:
                         break;
@@ -93,39 +112,34 @@ namespace Practice.MyPages
             }
   
 
-            ProductListViu.ItemsSource = pr.ToArray();
-            if (QuantityCb.SelectedIndex > -1 && pr.Count > 0)
+            //ProductListViu.ItemsSource = prodList.ToArray();
+            if (QuantityCb.SelectedIndex > 0 && prodList.Count() > 0)
             {
-                int selCount;
-                if ((QuantityCb.SelectedItem as ComboBoxItem).Content.ToString()=="Все")
+                int selCount = Convert.ToInt32((QuantityCb.SelectedItem as ComboBoxItem).Content);
+                prodList = prodList.Skip(selCount * actualPage).Take(selCount);
+                if (prodList.Count() == 0)
                 {
-                    products = BdConect.db.Product.Local;
-                }
-                else
-                {
-                    selCount = Convert.ToInt32((QuantityCb.SelectedItem as ComboBoxItem).Content);
-
-                    products = new ObservableCollection<Product>(products.Skip(selCount * actualPage).Take(selCount));
-                    if (products.Count() == 0)
-                    {
-                        actualPage--;
-                        Rechres();
-                    }
+             
                 }
             }
-       
 
-            if (PoiskTb.Text.Length>0)
+
+            if (PoiskTb == null)
+                return;
+            if (PoiskTb.Text.Length > 0 )
             {
                 //ProductListViu.ItemsSource = BdConect.db.Product.Where(x => x.Name.Contains(PoiskTb.Text)).ToList();
-                pr = new ObservableCollection<Product>(products.Where(x => x.Name.Contains(PoiskTb.Text) || x.Description.Contains(PoiskTb.Text)));
-             
+                //pr = new ObservableCollection<Product>(products.Where(x => x.Name.Contains(PoiskTb.Text) || x.Description.Contains(PoiskTb.Text)));
+                prodList = prodList.Where(x => x.Name.StartsWith(PoiskTb.Text) || x.Description.StartsWith(PoiskTb.Text));
             }
-            else
-            {
-                pr = BdConect.db.Product.Local;
-            }
-            products = pr;
+
+            //if (PoiskTb.Text.Length > 0)
+            //    prodList = prodList.Where(x => x.Name.StartsWith(PoiskTb.Text) || x.Description.StartsWith(PoiskTb.Text));
+
+            //products = pr;
+            //ProductListViu.ItemsSource = prodList.ToList();
+            ProductListViu.ItemsSource = prodList.ToList();
+            FondCount.Text = prodList.Count().ToString() + " из ";
 
 
         }
@@ -150,11 +164,13 @@ namespace Practice.MyPages
 
         private void PoiskTb_TextChanged(object sender, TextChangedEventArgs e)
         {
+            actualPage = 0;
             Rechres();
         }
 
         private void FiltrCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            actualPage = 0;
             Rechres();
         }
 
@@ -182,7 +198,13 @@ namespace Practice.MyPages
 
         private void QuantityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             Rechres();
+            actualPage = 0;
+            Rechres();
+        }
+
+        private void ShiplimentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NextPage(new Nav("", new ProductShipmentPage()));
         }
     }
 }

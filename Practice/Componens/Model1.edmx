@@ -50,6 +50,7 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="UnitMeasurementId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="InStock" Type="int" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -365,6 +366,7 @@
           <EntitySet Name="Gender" EntityType="ProductViModel.Gender" />
           <EntitySet Name="Order" EntityType="ProductViModel.Order" />
           <EntitySet Name="Product" EntityType="ProductViModel.Product" />
+          <EntitySet Name="ProductOrder" EntityType="ProductViModel.ProductOrder" />
           <EntitySet Name="ProductShipment" EntityType="ProductViModel.ProductShipment" />
           <EntitySet Name="Provider" EntityType="ProductViModel.Provider" />
           <EntitySet Name="Roly" EntityType="ProductViModel.Roly" />
@@ -389,9 +391,17 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_Order" Association="ProductViModel.FK_ProductOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_UnitMeasurement" Association="ProductViModel.FK_Product_UnitMeasurement">
             <End Role="UnitMeasurement" EntitySet="UnitMeasurement" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_Product" Association="ProductViModel.FK_ProductOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductShipment_Product" Association="ProductViModel.FK_ProductShipment_Product">
             <End Role="Product" EntitySet="Product" />
@@ -412,15 +422,6 @@
           <AssociationSet Name="CountryProduct" Association="ProductViModel.CountryProduct">
             <End Role="Country" EntitySet="Country" />
             <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <EntitySet Name="ProductOrder" EntityType="ProductViModel.ProductOrder" />
-          <AssociationSet Name="FK_ProductOrder_Order" Association="ProductViModel.FK_ProductOrder_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_Product" Association="ProductViModel.FK_ProductOrder_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Country">
@@ -466,10 +467,22 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="UnitMeasurementId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InStock" Type="Int32" />
           <NavigationProperty Name="UnitMeasurement" Relationship="ProductViModel.FK_Product_UnitMeasurement" FromRole="Product" ToRole="UnitMeasurement" />
+          <NavigationProperty Name="ProductOrder" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
           <NavigationProperty Name="ProductShipment" Relationship="ProductViModel.FK_ProductShipment_Product" FromRole="Product" ToRole="ProductShipment" />
           <NavigationProperty Name="Country" Relationship="ProductViModel.CountryProduct" FromRole="Product" ToRole="Country" />
-          <NavigationProperty Name="ProductOrder" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
+        </EntityType>
+        <EntityType Name="ProductOrder">
+          <Key>
+            <PropertyRef Name="ProdutId" />
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="ProdutId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="ProductViModel.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductShipment">
           <Key>
@@ -603,6 +616,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductOrder_Order">
+          <End Type="ProductViModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_UnitMeasurement">
           <End Type="ProductViModel.UnitMeasurement" Role="UnitMeasurement" Multiplicity="0..1" />
           <End Type="ProductViModel.Product" Role="Product" Multiplicity="*" />
@@ -612,6 +637,18 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="UnitMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrder_Product">
+          <End Type="ProductViModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="ProdutId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -667,41 +704,6 @@
           <End Type="ProductViModel.Country" Role="Country" Multiplicity="*" />
           <End Type="ProductViModel.Product" Role="Product" Multiplicity="*" />
         </Association>
-        <EntityType Name="ProductOrder">
-          <Key>
-            <PropertyRef Name="ProdutId" />
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="ProdutId" Type="Int32" Nullable="false" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="ProductViModel.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="ProductViModel.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_ProductOrder_Order">
-          <End Type="ProductViModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrder_Product">
-          <End Type="ProductViModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="ProductViModel.ProductOrder" Role="ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="ProdutId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -740,6 +742,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="ProductViModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UnitMeasurementId" ColumnName="UnitMeasurementId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -747,6 +750,15 @@
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductOrder">
+            <EntityTypeMapping TypeName="ProductViModel.ProductOrder">
+              <MappingFragment StoreEntitySet="ProductOrder">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProdutId" ColumnName="ProdutId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -838,15 +850,6 @@
               <ScalarProperty Name="Id" ColumnName="ContryId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ProductOrder">
-            <EntityTypeMapping TypeName="ProductViModel.ProductOrder">
-              <MappingFragment StoreEntitySet="ProductOrder">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ProdutId" ColumnName="ProdutId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
